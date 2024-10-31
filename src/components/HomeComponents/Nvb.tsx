@@ -54,7 +54,7 @@ const Nvb = () => {
                         Contact
                     </Link>
                     <Linkk className="text-sm font-medium hover:underline underline-offset-4 cursor-pointer" href="/admin">
-                        Admin
+                        Admi
                     </Linkk>
                 </nav>
                 <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMobileMenu}>
