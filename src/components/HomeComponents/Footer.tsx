@@ -12,6 +12,9 @@ const Footer = () => {
                 <Link className="text-xs hover:underline underline-offset-4" href="#">
                     Privacy
                 </Link>
+                <Link className="text-xs hover:underline underline-offset-4" href="/admin/login">
+                    login
+                </Link>
             </nav>
         </footer>
     )

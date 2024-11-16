@@ -27,15 +27,16 @@ function CodeIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 
-const Nvb = () => {
+const Nvb = ({ admin, id }: { admin: boolean, id: string }) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen)
     }
     return (
+
         <>
-            <header className="px-4 lg:px-6 h-14 flex items-center sticky top-0 bg-white shadow-sm border-b-[1px] border-gray-200">
+            <header className="px-4 lg:px-6 h-14 flex items-center sticky top-0 bg-white shadow-sm border-b-[1px] border-gray-200 z-20">
                 <Linkk className="flex items-center justify-center" href="#">
                     <CodeIcon className="h-6 w-6 text-primary" />
                     <span className="ml-2 text-lg font-bold">Youssof</span>
@@ -53,9 +54,10 @@ const Nvb = () => {
                     <Link className="text-sm font-medium hover:underline underline-offset-4 cursor-pointer" smooth={true} duration={800} to="contact">
                         Contact
                     </Link>
-                    <Linkk className="text-sm font-medium hover:underline underline-offset-4 cursor-pointer" href="/admin">
-                        Admi
-                    </Linkk>
+                    {admin === null || admin === true || !id === null ? <Linkk className="text-sm font-medium hover:underline underline-offset-4 cursor-pointer" href="/admin">
+                        Admin
+                    </Linkk> : <></>}
+
                 </nav>
                 <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMobileMenu}>
                     {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
