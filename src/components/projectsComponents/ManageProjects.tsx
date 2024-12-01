@@ -2,7 +2,9 @@
 import React from 'react'
 import { Trash } from 'lucide-react'
 import { Edit } from 'lucide-react'
+
 const ManageProjects = () => {
+
     return (
         <div className='w-2/3 mt-10'>
 

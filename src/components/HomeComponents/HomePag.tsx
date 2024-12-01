@@ -1,11 +1,7 @@
-import Hero from './Hero'
-import Social from './Social'
-import Nvb from './Nvb'
-import Projects from './Projects'
-import Footer from './Footer'
-import Skills from './Skills'
+
 import { cookies } from 'next/headers'
 import { verifyTokenForPage } from '@/utils/verifyToken'
+import Container from './Container'
 
 const HomePag = async () => {
 
@@ -18,16 +14,8 @@ const HomePag = async () => {
 
 
     return (
-        <div className="">
-
-            <Nvb admin={isAdmin} id={id}/>
-            <main className="flex flex-col justify-center w-full ">
-                <Hero />
-                <Skills admin={isAdmin} id={id}/>
-                <Projects />
-                <Social />
-                <Footer />
-            </main>
+        <div>
+            <Container isAdmin={isAdmin} id={id} />
         </div>
     );
 };

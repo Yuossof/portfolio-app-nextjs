@@ -1,86 +1,59 @@
-"use client"
-// import Link from 'next/link'
-import React from 'react'
-import { Menu, X } from "lucide-react"
-import { Button } from '../ui/button'
+'use client'
+
 import { useState } from 'react'
-import { Link } from "react-scroll"
-import Linkk from 'next/link'
-function CodeIcon(props: React.SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { Menu, X } from 'lucide-react'
+import { Code } from 'lucide-react'
+const Header = ({admin, id}) => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <header className="fixed w-full z-50 bg-gray-900 border-b-2 border-gray-800 bg-opacity-90 backdrop-blur-sm shadow-lg ">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center">
+            <Link href="/" className="text-white font-bold text-xl">
+             <Code /> Youssof
+            </Link>
+          </div>
+          <nav className="hidden md:block">
+            <ul className="flex space-x-4">
+              <li><Link href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</Link></li>
+              <li><Link href="#projects" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</Link></li>
+              <li><Link href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</Link></li>
+              <li><Link href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</Link></li>
+            </ul>
+          </nav>
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            >
+              <span className="sr-only">Open main menu</span>
+              {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="md:hidden"
         >
-            <polyline points="16 18 22 12 16 6" />
-            <polyline points="8 6 2 12 8 18" />
-        </svg>
-    )
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <Link href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</Link>
+            <Link href="#projects" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</Link>
+            <Link href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</Link>
+            <Link href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
+          </div>
+        </motion.div>
+      )}
+    </header>
+  )
 }
 
+export default Header
 
-const Nvb = ({ admin, id }: { admin: boolean, id: string }) => {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-    const toggleMobileMenu = () => {
-        setMobileMenuOpen(!mobileMenuOpen)
-    }
-    return (
-
-        <>
-            <header className="px-4 lg:px-6 h-14 flex items-center sticky top-0 bg-white shadow-sm border-b-[1px] border-gray-200 z-20">
-                <Linkk className="flex items-center justify-center" href="#">
-                    <CodeIcon className="h-6 w-6 text-primary" />
-                    <span className="ml-2 text-lg font-bold">Youssof</span>
-                </Linkk>
-                <nav className="ml-auto hidden md:flex gap-4 sm:gap-6">
-                    <Link className="text-sm font-medium hover:underline underline-offset-4 cursor-pointer" smooth={true} duration={800} to='about'>
-                        About
-                    </Link>
-                    <Link className="text-sm font-medium hover:underline underline-offset-4 cursor-pointer" smooth={true} duration={800} to='skills'>
-                        Skills
-                    </Link>
-                    <Link className="text-sm font-medium hover:underline underline-offset-4 cursor-pointer" smooth={true} duration={800} to="projects">
-                        Projects
-                    </Link>
-                    <Link className="text-sm font-medium hover:underline underline-offset-4 cursor-pointer" smooth={true} duration={800} to="contact">
-                        Contact
-                    </Link>
-                    {admin === null || admin === true || !id === null ? <Linkk className="text-sm font-medium hover:underline underline-offset-4 cursor-pointer" href="/admin">
-                        Admin
-                    </Linkk> : <></>}
-
-                </nav>
-                <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMobileMenu}>
-                    {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                </Button>
-            </header>
-            {mobileMenuOpen && (
-                <nav className="md:hidden flex flex-col items-center py-4 bg-background">
-                    <Linkk className="text-sm font-medium hover:underline underline-offset-4 py-2" href="#about" onClick={toggleMobileMenu}>
-                        About
-                    </Linkk>
-                    <Linkk className="text-sm font-medium hover:underline underline-offset-4 py-2" href="#skills" onClick={toggleMobileMenu}>
-                        Skills
-                    </Linkk>
-                    <Linkk className="text-sm font-medium hover:underline underline-offset-4 py-2" href="#projects" onClick={toggleMobileMenu}>
-                        Projects
-                    </Linkk>
-                    <Linkk className="text-sm font-medium hover:underline underline-offset-4 py-2" href="#contact" onClick={toggleMobileMenu}>
-                        Contact
-                    </Linkk>
-                </nav>
-            )}
-        </>
-    )
-}
-
-export default Nvb

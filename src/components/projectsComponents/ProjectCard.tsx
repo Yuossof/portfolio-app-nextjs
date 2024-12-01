@@ -1,64 +1,108 @@
-"use client"
-import React, { useEffect } from 'react'
-import Image from "next/image"
-import { Button } from "../ui/button"
-import Link from "next/link"
-import axios from 'axios'
-import { useState } from 'react'
-interface ProjectCardProps {
-  
-    imageUrl: string
+'use client'
 
-}
+import React, { useEffect, useState } from 'react'
+import Image from "next/image"
+import { Button } from '@/components/ui/button'
+import axios from 'axios'
+import { motion } from 'framer-motion'
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Github, Globe } from 'lucide-react'
 
 interface ProjectDTO {
     id: string,
     name: string,
-    description: string
+    description: string,
+    demoUrl: string,
+    githubUrl: string,
+    tags: [
+        { 
+            tagName: string,
+            id: string
+        }
+    ],
+    projectsImages: [
+        { imageUrl: string }
+    ]
 }
 
-
-const ProjectCard = ({imageUrl}: ProjectCardProps) => {
+const ProjectCard = () => {
     const [data, setData] = useState<ProjectDTO[]>([])
     const [errorMessage, setErrorMessage] = useState("")
+
     useEffect(() => {
         const getProjects = async () => {
             try {
                 const res = await axios.get("http://localhost:3000/api/admin/projects")
                 const projects = res.data
+                console.log(projects)
                 setData(projects)
-            } catch (error) {
-                setErrorMessage(error.response?.data.message)
+            } catch (error: any) {
+                setErrorMessage(error.response?.data?.message || "An error occurred while fetching projects.")
             }
         }
         getProjects()
     }, [])
+
     return (
-        <>
-            {data.map((project) => (
-                <div key={project.id} className='lg-[300px] md:w-[320px] sm:w-[360px] w-[330px] flex flex-col rounded-sm overflow-hidden border-2'>
-                    <div className='h-[195px]'>
-                        <Image
-                            src={imageUrl}
-                            alt="no image"
-                            width={300}
-                            height={200}
-                            className="w-full h-48 object-cover"
-                        />
-                    </div>
-                    <div className='h-[195px] flex flex-col justify-between items-start'>
-                        <div className='pl-4 pt-6 flex flex-col gap-2'>
-                            <h1 className='text-gray-700 text-xl'>{project.name}</h1>
-                            <p className='text-sm text-muted-foreground'>{project.description}</p>
-                        </div>
-                        <Button className='ml-3 mb-3'>
-                            <Link href={`/project/${project.id}`}>View Project</Link>
-                        </Button>
-                    </div>
+        <section id="projects" className="py-20 w-full flex justify-center bg-gray-900">
+            <div className="container px-4 w-full">
+                {errorMessage && <h1 className="text-red-500 text-center mb-4">{errorMessage}</h1>}
+                <h2 className="text-3xl font-bold mb-12 text-center text-slate-200">Featured Projects</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    {data.map((project, index) => (
+                        <motion.div
+                        className='z-10'
+                            key={project.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                        >
+                            <Card className="overflow-hidden z-20 group rounded-lg border-2 border-gray-700 bg-gray-900 shadow-md h-full flex flex-col">
+                                <CardContent className="p-0 flex-grow">
+                                    <div className="relative border-b-2 border-gray-700 overflow-hidden h-48">
+                                        <Image 
+                                            src={project.projectsImages[0]?.imageUrl || "/placeholder.svg"} 
+                                            alt={project.name} 
+                                            layout="fill"
+                                            objectFit="cover"
+                                        />
+                                    </div>
+                                    <div className="p-4">
+                                        <h3 className="font-semibold text-lg mb-2 text-slate-200">{project.name}</h3>
+                                        <p className="text-sm text-gray-300 mb-4 line-clamp-3">{project.description}</p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.tags.map((tag) => (
+                                                <Badge key={tag.id} variant="secondary" className="text-xs bg-gray-700 text-gray-200">
+                                                    {tag.tagName}
+                                                </Badge>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </CardContent>
+                                <CardFooter className="mt-auto w-full">
+                                    <div className='w-full flex items-center justify-between gap-4'>
+                                        <Button className='w-3/4  text-slate-200 border-2 hover:border-gray-700 hover:bg-slate-900 border-gray-800' size="sm" variant="default"  asChild>
+                                            <a href={project.demoUrl || "#"} target="_blank" rel="noopener noreferrer">
+                                                <Globe className="mr-2 h-4 w-4" />
+                                                Live Preview
+                                            </a>
+                                        </Button>
+                                        <Button size="sm" className='w-1/4 bg-[#0b0f22] hover:bg-[#020617e1]  border-2 border-gray-800 text-white' asChild>
+                                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                                                <Github className="h-4 w-4" />
+                                            </a>
+                                        </Button>
+                                    </div>
+                                </CardFooter>
+                            </Card>
+                        </motion.div>
+                    ))}
                 </div>
-            ))}
-        </>
+            </div>
+        </section>
     )
 }
 
 export default ProjectCard
+

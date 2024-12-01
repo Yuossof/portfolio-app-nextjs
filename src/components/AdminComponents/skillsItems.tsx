@@ -4,10 +4,9 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { X } from 'lucide-react'
 
-const SkillsItems = ({skillsFetch2}) => {
+const SkillsItems = ({skillsFetch2, setSkillsFetch2}: {skillsFetch2: boolean, setSkillsFetch2: any}) => {
     const [data, setData] = useState([])
     const [activeItemId, setActiveItemId] = useState("")
-    const [fetchSkills, setFetchSkills] = useState<boolean>(false)
     const [isLoading, setIsloading] = useState<boolean>(false)
     useEffect(() => {
         const getSkills = async () => {
@@ -22,13 +21,13 @@ const SkillsItems = ({skillsFetch2}) => {
         }
 
         getSkills()
-    }, [fetchSkills, skillsFetch2])
+    }, [skillsFetch2])
 
     const deleteSkill = async (skillId: string) => {
         try {
             setIsloading(true)
             await axios.delete(`http://localhost:3000/api/admin/skills/${skillId}`)
-            window.location.reload()
+            setSkillsFetch2(prev => !prev)
         } catch (error) {
             setIsloading(false)
             console.log(error)
@@ -45,7 +44,6 @@ const SkillsItems = ({skillsFetch2}) => {
                  <X className='w-[17px] cursor-pointer hover:opacity-80 text-gray-600' onClick={()=> {
                     deleteSkill(skill.id)
                     setActiveItemId(skill.id)
-                    setFetchSkills(prev => !prev)
                  }}/>
                 </span>
             </div>

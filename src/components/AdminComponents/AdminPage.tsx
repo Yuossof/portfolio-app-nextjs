@@ -1,29 +1,24 @@
 'use client'
 import { useState } from 'react'
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import axios from "axios"
-import Link from 'next/link'
 import { LogOut } from 'lucide-react'
 import { X } from 'lucide-react'
-import { Settings } from 'lucide-react'
 import SkillsItems from './skillsItems'
 import { useRouter } from 'next/navigation'
 import Sidebar from './Sidebar'
+import AddProductBox from './AddProductBox'
 type Route = 'home' | 'projects' | 'skills'
 
 export default function AdminPage() {
   const router = useRouter()
   const [currentRoute, setCurrentRoute] = useState<Route>('skills')
   const [skillName, setSkillName] = useState('')
-  const [projectName, setProjectName] = useState('')
-  const [projectDescription, setProjectDescription] = useState('')
-  const [projectStatus, setProjectStatus] = useState('')
+
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isLoadingForProjects, setIsLoadingForProjects] = useState<boolean>(false)
   const [logoutText ,setLogoutText] = useState<string>("")
   const [logoutTextInpValue ,setLogoutTextInpValue] = useState<string>("")
   const [showBox, setShowBox] = useState<boolean>(false)
@@ -36,27 +31,12 @@ export default function AdminPage() {
     await axios.post("http://localhost:3000/api/admin/skills", {
       name: skillName
     })
+    setSkillsFetch2(prev => !prev)
     setSkillName('')
     setIsLoading(false)
   }
 
-  const handleProjectsSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    try {
-      setIsLoadingForProjects(true)
-      await axios.post("http://localhost:3000/api/admin/projects", {
-        name: projectName,
-        description: projectDescription
-      })
-      setProjectName('')
-      setProjectDescription('')
-    } catch (error) {
-      setIsLoadingForProjects(false)
-      console.log(error)
-    } finally {
-      setIsLoadingForProjects(false)
-    }
-  }
+
 
   const logout = async() => {
     try {
@@ -82,6 +62,9 @@ export default function AdminPage() {
     }
     setLogoutText(result);
 }
+
+
+
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -129,7 +112,7 @@ export default function AdminPage() {
             <h2 className="text-2xl font-semibold">Skills Management</h2>
             <Card className='relative'>
             <div className=' absolute top-2 right-3'>
-              <SkillsItems skillsFetch2={skillsFetch2}/>
+              <SkillsItems setSkillsFetch2={setSkillsFetch2} skillsFetch2={skillsFetch2}/>
             </div>
               <CardHeader>
                 <CardTitle>Create New Skill</CardTitle>
@@ -147,7 +130,7 @@ export default function AdminPage() {
                       required
                     />
                   </div>
-                  <Button onClick={()=> setSkillsFetch2(prev => !prev)} disabled={isLoading} type="submit">
+                  <Button disabled={isLoading} type="submit">
                     {isLoading ? "wait..." : "Create Skill"}
                   </Button>
                 </form>
@@ -157,55 +140,7 @@ export default function AdminPage() {
         )}
 
         {currentRoute === 'projects' && (
-          <section className="space-y-6 relative">
-            <Link href="/admin/manage-projects" className={buttonVariants({
-              className: "absolute right-3 top-0 border-2",
-            })}>Manage Projects <Settings /></Link>
-            <h2 className="text-2xl font-semibold">Project Management</h2>
-            <Card>
-              <CardHeader>
-                <CardTitle>Create New Project</CardTitle>
-                <CardDescription>Add a new project to the system</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleProjectsSubmit} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="projectName">Project Name</Label>
-                    <Input
-                      id="projectName"
-                      value={projectName}
-                      onChange={(e) => setProjectName(e.target.value)}
-                      placeholder="Enter project name"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="projectDescription">Project Description</Label>
-                    <Textarea
-                      id="projectDescription"
-                      value={projectDescription}
-                      onChange={(e) => setProjectDescription(e.target.value)}
-                      placeholder="Enter project description"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="projectStatus">Project Status</Label>
-                    <Input
-                      id="projectStatus"
-                      value={projectStatus}
-                      onChange={(e) => setProjectStatus(e.target.value)}
-                      placeholder="Enter project status"
-                      required
-                    />
-                  </div>
-                  <Button disabled={isLoadingForProjects} type="submit">
-                    {isLoadingForProjects ? "waite..." : "Create Project"}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </section>
+          <AddProductBox />
         )}
       </main>
     </div>

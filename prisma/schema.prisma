@@ -18,28 +18,41 @@ model User {
   name      String
   email     String   @unique
   password  String
-  isAdmin   Boolean @default(true)
+  isAdmin   Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Skills {
-  id        String   @id @default(uuid())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Projects {
   id             String           @id @default(uuid())
   name           String
   description    String
-  ProjectsImages ProjectsImages[]
+  demoUrl        String?
+  githubUrl      String?
+  projectsImages ProjectsImages[]
+  tags           Tags[]
+}
+
+model Tags {
+  id        String   @id @default(uuid())
+  tagName   String
+  projectId String?
+  project   Projects? @relation(references: [id], fields: [projectId], onDelete: Cascade)
 }
 
 model ProjectsImages {
   id        String   @id @default(uuid())
   imageUrl  String
   createdAt DateTime @default(now())
-  projects  Projects @relation(references: [id], fields: [id], onDelete: Cascade)
+  projects  Projects? @relation(references: [id], fields: [projectId], onDelete: Cascade)
+  projectId String?
+
 }

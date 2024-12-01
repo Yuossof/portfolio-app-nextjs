@@ -30,7 +30,7 @@ const Sidebar = ({setCurrentRoute, currentRoute}: Props) => {
                     onClick={() => setCurrentRoute('home')}
                 >
                     <HomeIcon className="mr-2 h-4 w-4" />
-                    Home
+                    Admin
                 </Button>
 
                 <Button
