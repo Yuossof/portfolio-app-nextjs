@@ -9,7 +9,7 @@ import Projects from './Projects'
 import Social from './Social'
 import Footer from './Footer'
 
-const Container = ({ isAdmin, id }) => {
+const Container = ({ isAdmin, id }: {isAdmin: boolean, id: string}) => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const Container = ({ isAdmin, id }) => {
     }, [])
     return (
         <div>
-            <Nvb admin={isAdmin} id={id} />
+            <Nvb admin={isAdmin} />
             <main className="flex flex-col justify-center w-full bg-gray-900 min-h-screen relative overflow-visible">
                 <div
                     className="absolute inset-0 overflow-hidden"

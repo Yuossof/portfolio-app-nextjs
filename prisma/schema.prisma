@@ -54,5 +54,4 @@ model ProjectsImages {
   createdAt DateTime @default(now())
   projects  Projects? @relation(references: [id], fields: [projectId], onDelete: Cascade)
   projectId String?
-
 }

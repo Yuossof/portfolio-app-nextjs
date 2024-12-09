@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { Code } from 'lucide-react'
-const Header = ({admin, id}) => {
+const Header = ({admin}: {admin: boolean}) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -48,6 +48,7 @@ const Header = ({admin, id}) => {
             <Link href="#projects" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</Link>
             <Link href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</Link>
             <Link href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
+            {admin && <Link href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</Link>}
           </div>
         </motion.div>
       )}
