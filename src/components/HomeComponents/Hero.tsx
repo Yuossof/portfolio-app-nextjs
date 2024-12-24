@@ -62,13 +62,8 @@ const Hero = () => {
                     >
                         <a href="#projects">View My Work</a>
                     </Button>
-                    <Button
-                        asChild
-                        size="lg"
-                        variant="outline"
-                        className="bg-gray-800 text-white hover:bg-gray-700"
-                    >
-                        <a href="#contact">Contact Me</a>
+                    <Button size="lg" className="border-[1px] border-gray-600 hover:shadow-lg">
+                        Contact Me
                     </Button>
                 </div>
                 <div className="flex justify-center space-x-6">

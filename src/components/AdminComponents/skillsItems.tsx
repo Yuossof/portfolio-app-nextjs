@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { SetStateAction } from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { X } from 'lucide-react'
 
-const SkillsItems = ({skillsFetch2, setSkillsFetch2}: {skillsFetch2: boolean, setSkillsFetch2: any}) => {
+const SkillsItems = ({skillsFetch2, setSkillsFetch2}: {skillsFetch2: boolean, setSkillsFetch2: React.Dispatch<SetStateAction<boolean>>}) => {
     const [data, setData] = useState([])
     const [activeItemId, setActiveItemId] = useState("")
     const [isLoading, setIsloading] = useState<boolean>(false)

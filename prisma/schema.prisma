@@ -18,7 +18,7 @@ model User {
   name      String
   email     String   @unique
   password  String
-  isAdmin   Boolean  @default(true)
+  isAdmin   Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -42,16 +42,16 @@ model Projects {
 }
 
 model Tags {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   tagName   String
   projectId String?
   project   Projects? @relation(references: [id], fields: [projectId], onDelete: Cascade)
 }
 
 model ProjectsImages {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   imageUrl  String
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   projects  Projects? @relation(references: [id], fields: [projectId], onDelete: Cascade)
   projectId String?
 }

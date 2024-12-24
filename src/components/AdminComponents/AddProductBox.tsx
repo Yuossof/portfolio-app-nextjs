@@ -26,8 +26,7 @@ const AddProductBox = () => {
     const [tags, setTags] = useState<string[]>([])
     const [demoUrl, setDemoUrl] = useState("")
     const [githubUrl, setGithubUrl] = useState("")
-    const preset_name = "qiijedbj";
-    const cloud_name = "dx9rie3vv";
+
     const pushTags = () => {
         if (projectTag !== "") {
             setProjectTag("")
@@ -63,11 +62,11 @@ const AddProductBox = () => {
         try {
             const uploadPromises = uploadedImages.map(async (image) => {
                 const form = new FormData();
-                form.append("file", image.file); // استخدم image.file هنا
-                form.append("upload_preset", preset_name);
+                form.append("file", image.file); 
+                form.append("upload_preset", process.env.NEXT_PUBLIC_PRESET_NAME as string);
 
                 const res = await axios.post<CloudinaryResponse>(
-                    `https://api.cloudinary.com/v1_1/${cloud_name}/upload`,
+                    `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/upload`,
                     form
                 );
 
@@ -98,6 +97,12 @@ const AddProductBox = () => {
             })
             setProjectName('')
             setProjectDescription('')
+            setProjectTag('')
+            setTags([])
+            setDemoUrl("")
+            setGithubUrl("")
+            setUploadedImages([])
+
         } catch (error) {
             setIsLoadingForProjects(false)
             console.log(error)

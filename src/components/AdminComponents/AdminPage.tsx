@@ -16,7 +16,10 @@ type Route = 'home' | 'projects' | 'skills'
 export default function AdminPage() {
   const router = useRouter()
   const [currentRoute, setCurrentRoute] = useState<Route>('skills')
-  const [skillName, setSkillName] = useState('')
+  const [skillsData, setSkillsData] = useState({
+    name: "",
+    description: "",
+  })
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [logoutText ,setLogoutText] = useState<string>("")
@@ -29,10 +32,11 @@ export default function AdminPage() {
     e.preventDefault()
     setIsLoading(true)
     await axios.post("http://localhost:3000/api/admin/skills", {
-      name: skillName
+      name: skillsData.name,
+      description: skillsData.description,
     })
     setSkillsFetch2(prev => !prev)
-    setSkillName('')
+    setSkillsData({name:'', description: ""})
     setIsLoading(false)
   }
 
@@ -124,9 +128,26 @@ export default function AdminPage() {
                     <Label htmlFor="skillName">Skill Name</Label>
                     <Input
                       id="skillName"
-                      value={skillName}
-                      onChange={(e) => setSkillName(e.target.value)}
+                      value={skillsData.name}
+                      onChange={(e) => setSkillsData({
+                        ...skillsData,
+                        name: e.target.value
+                      })}
                       placeholder="Enter skill name"
+                      required
+                    />
+                  </div>
+ 
+                  <div className="space-y-2">
+                    <Label htmlFor="description">Skill Name</Label>
+                    <Input
+                      id="description"
+                      value={skillsData.description}
+                      onChange={(e) => setSkillsData({
+                        ...skillsData,
+                        description: e.target.value
+                      })}
+                      placeholder="Enter Description"
                       required
                     />
                   </div>
