@@ -6,6 +6,7 @@ import { useInView } from 'react-intersection-observer'
 import { Typewriter } from 'react-simple-typewriter'
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 const Hero = () => {
     const controls = useAnimation()
@@ -41,7 +42,7 @@ const Hero = () => {
                     </span>
                     <span className='text-white'>
                         <Typewriter
-                            words={['Youssof', 'a Frontend Developer', 'a Creator']}
+                            words={['Youssof', 'a Developer', 'a Frontend Developer']}
                             loop={0}
                             cursor
                             cursorStyle="_"
@@ -62,9 +63,11 @@ const Hero = () => {
                     >
                         <a href="#projects">View My Work</a>
                     </Button>
-                    <Button size="lg" className="border-[1px] border-gray-600 hover:shadow-lg">
-                        Contact Me
-                    </Button>
+                    <Link href="#contact">
+                        <Button size="lg" className="border-[1px] border-gray-600 hover:shadow-lg">
+                            Contact Me
+                        </Button>
+                    </Link>
                 </div>
                 <div className="flex justify-center space-x-6">
                     <motion.a

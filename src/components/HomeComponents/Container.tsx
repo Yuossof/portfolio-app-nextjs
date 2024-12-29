@@ -9,23 +9,23 @@ import Projects from './Projects'
 import Social from './Social'
 import Footer from './Footer'
 
-const Container = ({ isAdmin, id }: {isAdmin: boolean, id: string}) => {
+const Container = ({ isAdmin }: { isAdmin: boolean }) => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             setMousePosition({ x: e.clientX, y: e.clientY })
         }
-
+        
         window.addEventListener('mousemove', handleMouseMove)
-
         return () => {
             window.removeEventListener('mousemove', handleMouseMove)
         }
     }, [])
+
     return (
         <div>
-            <Nvb admin={isAdmin} /> 
+            <Nvb admin={isAdmin} />
             <main className="flex flex-col justify-center w-full bg-gray-900 min-h-screen relative overflow-visible">
                 <div
                     className="absolute inset-0 overflow-hidden"
@@ -34,7 +34,7 @@ const Container = ({ isAdmin, id }: {isAdmin: boolean, id: string}) => {
                     }}
                 />
                 <Hero />
-                <Skills admin={isAdmin} id={id} />
+                <Skills />
                 <Projects />
                 <Social />
                 <Footer />

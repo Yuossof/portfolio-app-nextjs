@@ -9,13 +9,12 @@ const HomePag = async () => {
         const token = cookieStore.get('jwtToken')?.value;
         const userPayload = verifyTokenForPage(token as string)
         const isAdmin = userPayload?.isAdmin as boolean
-        const id = userPayload?.id as string
 
 
 
     return (
         <div>
-            <Container isAdmin={isAdmin} id={id} />
+            <Container isAdmin={isAdmin} />
         </div>
     );
 };

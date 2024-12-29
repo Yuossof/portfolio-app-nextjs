@@ -7,6 +7,6 @@ export async function GET(request: NextRequest){
         (await cookies()).delete("jwtToken")
         return NextResponse.json({message: "logout"})
     } catch (error) {
-        return NextResponse.json({message: "internal server error"} , {status: 500})
+        return NextResponse.json({message: "internal server error", err: error} , {status: 500})
     }
 }

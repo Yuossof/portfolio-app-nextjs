@@ -71,7 +71,8 @@ const AddProductBox = () => {
                 );
 
                 return res.data.url;
-            });
+            }); 
+
 
             const urls = await Promise.all(uploadPromises);
             console.log(urls);
@@ -83,11 +84,11 @@ const AddProductBox = () => {
     };
 
     const handleProjectsSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
+        e.preventDefault() 
         setIsLoadingForProjects(true)
         const imageUrl = await uploadImages()
         try {
-            await axios.post("http://localhost:3000/api/admin/projects", {
+            await axios.post(`${process.env.NEXT_BASE_URL}/api/admin/projects`, {
                 name: projectName,
                 description: projectDescription,
                 ProjectsImages: imageUrl,
@@ -222,7 +223,7 @@ const AddProductBox = () => {
 
                         </form>
 
-                        <div>
+                        <div className='mt-4'>
                             <div className="space-y-2">
                                 {/* <Label>Product Images</Label> */}
                                 <div

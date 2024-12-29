@@ -3,10 +3,12 @@ import React from 'react'
 import { Button } from '../ui/button'
 import { HomeIcon, BriefcaseIcon, LightbulbIcon } from 'lucide-react'
 import Link from 'next/link'
+type Route = 'home' | 'projects' | 'skills'
 interface Props {
-    setCurrentRoute?: any,
-    currentRoute?: any
+    setCurrentRoute: React.Dispatch<React.SetStateAction<Route>>,
+    currentRoute?: string
 }
+
 const Sidebar = ({setCurrentRoute, currentRoute}: Props) => {
     return (
         <aside className="w-64 bg-white shadow-md">
