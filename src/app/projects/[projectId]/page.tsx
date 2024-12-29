@@ -6,7 +6,7 @@ import { Github, Globe } from 'lucide-react';
 const Page = async ({ params }: { params: Promise<{ projectId: string }> }) => {
   const projectId = (await params).projectId
 
-    const response = await fetch(`http://localhost:3000/api/admin/projects/${projectId}`, {
+    const response = await fetch(`/api/admin/projects/${projectId}`, {
       next: {
         revalidate: 120
       },
