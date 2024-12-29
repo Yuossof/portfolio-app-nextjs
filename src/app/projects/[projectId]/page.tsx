@@ -3,16 +3,16 @@ import SingleProject from '@/components/projectsComponents/SingleProject'
 import ProjectImages from '@/components/projectsComponents/ProjectImages';
 import { Button } from '@/components/ui/button';
 import { Github, Globe } from 'lucide-react';
-const Page = async ({ params }: { params: { projectId: string } }) => {
-  try {
-    const response = await fetch(`http://localhost:3000/api/admin/projects/${params.projectId}`, {
+const Page = async ({ params }: { params: Promise<{ projectId: string }> }) => {
+  const projectId = (await params).projectId
+
+    const response = await fetch(`http://localhost:3000/api/admin/projects/${projectId}`, {
       next: {
         revalidate: 120
       },
       cache: "force-cache"
     });
     const data = await response.json();
-    console.log(data)
     if (response.status !== 200) {
       return <div>Error: {data.message}</div>;
     }
@@ -50,9 +50,7 @@ const Page = async ({ params }: { params: { projectId: string } }) => {
 
 
     );
-  } catch (error) {
-    return <div>Error loading project data: {error.message}</div>;
-  }
+
 }
 
 export default Page;

@@ -59,7 +59,6 @@ const AddProductBox = () => {
 
 
     const uploadImages = async (): Promise<string[]> => {
-        try {
             const uploadPromises = uploadedImages.map(async (image) => {
                 const form = new FormData();
                 form.append("file", image.file); 
@@ -75,12 +74,8 @@ const AddProductBox = () => {
 
 
             const urls = await Promise.all(uploadPromises);
-            console.log(urls);
             return urls;
-        } catch (error) {
-            console.error("Error uploading images:", error);
-            return [];
-        }
+        
     };
 
     const handleProjectsSubmit = async (e: React.FormEvent) => {

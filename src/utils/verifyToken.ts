@@ -9,6 +9,7 @@ export function verifyToken(request: NextRequest): JwtPayloadType | null{
         if(!token) return null
         const userPayload = jwt.verify(token, process.env.JWT_PRIVATE_KEY as string) as JwtPayloadType
         return userPayload
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
         return null
     }
@@ -22,6 +23,7 @@ export function verifyTokenForPage(token: string): JwtPayloadType | null{
         const userPayload = jwt.verify(token, process.env.JWT_PRIVATE_KEY as string) as JwtPayloadType
         if(!userPayload) return null
         return userPayload
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
         return null
     }

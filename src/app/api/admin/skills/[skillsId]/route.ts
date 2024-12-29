@@ -4,9 +4,9 @@ import prisma from "@/utils/db";
 // interface ParamsProps {
 //     params: {skillsId: any}
 // }
-export async function DELETE(request: NextRequest, context: { params: { skillsId: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ skillsId: string }> }) {
     try {
-        const { skillsId } =  context.params;
+        const skillsId  =  (await params).skillsId;
         const userPayload = verifyToken(request)
         if(!userPayload || userPayload.isAdmin === false) {
             return NextResponse.json({message: "hahahahaha try again 😉"}, { status: 400 })

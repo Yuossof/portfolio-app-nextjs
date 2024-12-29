@@ -1,10 +1,15 @@
 "use client"
 import React, { useState } from 'react'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+
+interface ErrorResponse {
+    message: string;
+}
+
 const LoginForm = () => {
     const router = useRouter()
     const [email, setEmail] = useState("")
@@ -23,9 +28,8 @@ const LoginForm = () => {
             router.push("/admin")
         } catch (error) {
             setIsLoading(false)
-
-            // console.log(error.response.data.message)
-            setResErr(error.response.data.message)
+            const axiosError = error as AxiosError<ErrorResponse>
+            setResErr(axiosError.response?.data?.message || "something went wrong")
         }
     }
 
@@ -40,7 +44,7 @@ const LoginForm = () => {
                 <div className='flex flex-col gap-2 mt-3'>
                     {resErr !== "" && <span className='text-[13px] text-red-400'>* {resErr}</span>}
                     <Link className='text-muted-foreground hover:underline text-[13px] ml-2' href="/admin/login/reset">
-                      forget password?
+                        forget password?
                     </Link>
                     <Button disabled={isLoading} type='submit'>
                         {isLoading ? "wait..." : "Login"}

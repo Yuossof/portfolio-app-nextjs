@@ -21,7 +21,6 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({message: "sorry you are not user"}, {status: 400})
         }
         const body = await request.json()
-        console.log(body)
         const project = await prisma.projects.create({
             data: {
                 name: body.name,
@@ -31,7 +30,7 @@ export async function POST(request: NextRequest) {
             }
         })
         const projectTags = body.tags.map((tagName: string) => ({
-            tagName: tagName, // استخدام النص مباشرة
+            tagName: tagName, 
             projectId: project.id,
         }));
 
@@ -50,10 +49,11 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({message: "project creates successfully"}, {status: 201})
     } catch (error) {
-        return NextResponse.json({message: "internal server error"}, {status: 500})
+        return NextResponse.json({message: "internal server error", error}, {status: 500})
     }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(request: NextRequest) {
     try {
         const projects = await prisma.projects.findMany({
@@ -69,6 +69,6 @@ export async function GET(request: NextRequest) {
         })
         return NextResponse.json(projects, {status: 200})
     } catch (error) {
-        return NextResponse.json({message: "internal server error"}, {status: 500})
+        return NextResponse.json({message: "internal server error", error}, {status: 500})
     }
 }

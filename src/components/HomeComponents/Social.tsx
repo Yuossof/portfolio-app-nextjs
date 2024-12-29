@@ -12,7 +12,7 @@ const Social = () => {
                     <div className="space-y-2">
                         <h2 className="text-3xl text-slate-200 font-bold tracking-tighter sm:text-4xl md:text-5xl">Get in Touch</h2>
                         <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
-                            I'm always open to new opportunities and collaborations. Feel free to reach out!
+                            I&apos;m always open to new opportunities and collaborations. Feel free to reach out!
                         </p>
                     </div>
                     <div className="flex space-x-4" id='contact'>
