@@ -85,7 +85,7 @@ const ProjectCard = () => {
                                     </div>
                                     <div className="p-4">
                                         <Link href={`/projects/${project.id}`}><h3 className="font-semibold text-lg mb-2 text-slate-200">{project.name}</h3></Link>
-                                        <p className="text-sm text-gray-300 mb-4 line-clamp-3">{project.description}</p>
+                                        <p className="text-sm text-gray-300 mb-4 line-clamp-3 ml-1">{project.description}</p>
                                         <div className="flex flex-wrap gap-2">
                                             {project.tags.map((tag) => (
                                                 <Badge key={tag.id} variant="secondary" className="text-xs hover:!bg-gray-600 bg-gray-700 text-gray-200">
