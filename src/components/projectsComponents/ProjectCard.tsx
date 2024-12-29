@@ -42,7 +42,7 @@ const ProjectCard = () => {
         const getProjects = async () => {
             try {
                 setIsLoading(true)
-                const res = await axios.get(`${process.env.NEXT_BASE_URL}/api/admin/projects`)
+                const res = await axios.get("/api/admin/projects")
                 const projects = res.data
                 setIsLoading(false)
                 setData(projects)

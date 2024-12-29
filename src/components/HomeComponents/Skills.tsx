@@ -25,7 +25,7 @@ const Skills = () => {
     const getSkills = async () => {
       try {
         setIsloading(true)
-        const res = await axios.get(`${process.env.NEXT_BASE_URL}/api/admin/skills`)
+        const res = await axios.get("/api/admin/skills")
         const skills = res.data
         setIsloading(false)
         setData(skills)

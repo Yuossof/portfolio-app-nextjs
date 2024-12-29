@@ -31,7 +31,7 @@ export default function AdminPage() {
   const handleSkillSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    await axios.post(`${process.env.NEXT_BASE_URL}/api/admin/skills`, {
+    await axios.post("/api/admin/skills", {
       name: skillsData.name,
       description: skillsData.description,
     })
@@ -44,7 +44,7 @@ export default function AdminPage() {
 
   const logout = async() => {
       setLogoutLoading(true)
-      await axios.get(`${process.env.NEXT_BASE_URL}/api/admin/user/logout`)
+      await axios.get("/api/admin/user/logout")
       router.push("/")
   }
 

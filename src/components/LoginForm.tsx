@@ -20,7 +20,7 @@ const LoginForm = () => {
         eo.preventDefault()
         try {
             setIsLoading(true)
-            await axios.post("http://localhost:3000/api/admin/user/login", {
+            await axios.post("/api/admin/user/login", {
                 email: email,
                 password: password
             })

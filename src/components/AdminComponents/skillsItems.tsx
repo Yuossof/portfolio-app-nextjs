@@ -11,7 +11,7 @@ const SkillsItems = ({skillsFetch2, setSkillsFetch2}: {skillsFetch2: boolean, se
     useEffect(() => {
         const getSkills = async () => {
             try {
-                const res = await axios.get(`${process.env.NEXT_BASE_URL}/api/admin/skills`)
+                const res = await axios.get("/api/admin/skills")
                 const skills = res.data
                 setData(skills)
                 console.log(skills)
@@ -26,7 +26,7 @@ const SkillsItems = ({skillsFetch2, setSkillsFetch2}: {skillsFetch2: boolean, se
     const deleteSkill = async (skillId: string) => {
         try {
             setIsloading(true)
-            await axios.delete(`${process.env.NEXT_BASE_URL}/api/admin/skills/${skillId}`)
+            await axios.delete(`/api/admin/skills/${skillId}`)
             setSkillsFetch2(prev => !prev)
         } catch (error) {
             setIsloading(false)
