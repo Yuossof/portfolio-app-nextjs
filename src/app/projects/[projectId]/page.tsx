@@ -6,7 +6,7 @@ import { Github, Globe } from 'lucide-react';
 const Page = async ({ params }: { params: Promise<{ projectId: string }> }) => {
   const projectId = (await params).projectId
 
-    const response = await fetch(`/api/projects/${projectId}`, {
+    const response = await fetch(`https://portfolio-app-nextjs-brown.vercel.app/api/projects/${projectId}`, {
       next: {
         revalidate: 120
       },

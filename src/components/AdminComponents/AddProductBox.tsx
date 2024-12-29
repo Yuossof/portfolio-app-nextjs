@@ -83,7 +83,7 @@ const AddProductBox = () => {
         setIsLoadingForProjects(true)
         const imageUrl = await uploadImages()
         try {
-            await axios.post("/api/admin/projects", {
+            await axios.post("/api/projects", {
                 name: projectName,
                 description: projectDescription,
                 ProjectsImages: imageUrl,
