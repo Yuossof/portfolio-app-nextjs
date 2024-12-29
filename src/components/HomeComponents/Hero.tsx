@@ -26,7 +26,7 @@ const Hero = () => {
     }
 
     return (
-        <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 ">
+        <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 p-6">
 
             <motion.div
                 ref={ref}
