@@ -38,7 +38,7 @@ const Hero = () => {
             >
                 <h1 className="text-4xl sm:text-6xl font-extrabold mb-4">
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-                        Hello, I&apos;m{' '} edd
+                        Hello, I&apos;m{' '}
                     </span>
                     <span className='text-white'>
                         <Typewriter
