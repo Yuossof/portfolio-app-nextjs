@@ -1,6 +1,5 @@
 "use client"
 import React, { useState } from 'react'
-import { Button } from '../ui/button'
 import { Settings, BriefcaseIcon, LightbulbIcon, ChevronRight } from 'lucide-react'
 
 type Route = 'home' | 'projects' | 'skills'
