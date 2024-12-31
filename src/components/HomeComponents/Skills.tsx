@@ -42,7 +42,7 @@ const Skills = () => {
 
 
   return (
-    <section id="skills" className="py-20 bg-slate-900 z-10">
+    <section id="skills" className="py-20 bg-slate-900 z-30">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-12 text-center text-slate-200">My Skills {errorMessage}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

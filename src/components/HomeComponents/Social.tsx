@@ -15,20 +15,22 @@ const Social = () => {
                             I&apos;m always open to new opportunities and collaborations. Feel free to reach out!
                         </p>
                     </div>
-                    <div className="flex space-x-4" id='contact'>
+                    <div className="flex gap-3 sm:flex-col lg:flex-row xl:flex-row 2xl:flex-row md:flex-row flex-col" id='contact'>
+                        <div className='flex gap-3'>
+                            <Button asChild variant="default" className='bg-slate-900 border-2 border-gray-700 shadow-lg'>
+                                <Link href="mailto:youssofwr@gmail.com">
+                                    <Mail className="mr-2 h-4 w-4" />
+                                    Email
+                                </Link>
+                            </Button>
+                            <Button asChild variant="default" className='bg-slate-900 border-2 border-gray-700 shadow-lg'>
+                                <Link href="https://github.com/Yuossof">
+                                    <Github className="mr-2 h-4 w-4" />
+                                    GitHub
+                                </Link>
+                            </Button>
+                        </div>
                         <Button asChild variant="default" className='bg-slate-900 border-2 border-gray-700 shadow-lg'>
-                            <Link href="mailto:youssofwr@gmail.com">
-                                <Mail className="mr-2 h-4 w-4" />
-                                Email
-                            </Link>
-                        </Button>
-                        <Button asChild variant="default"  className='bg-slate-900 border-2 border-gray-700 shadow-lg'>
-                            <Link href="https://github.com/Yuossof">
-                                <Github className="mr-2 h-4 w-4" />
-                                GitHub
-                            </Link>
-                        </Button>
-                        <Button asChild variant="default"  className='bg-slate-900 border-2 border-gray-700 shadow-lg'>
                             <Link href="https://linkedin.com/in/youssof-ahmed-0839932a6">
                                 <Linkedin className="mr-2 h-4 w-4" />
                                 LinkedIn

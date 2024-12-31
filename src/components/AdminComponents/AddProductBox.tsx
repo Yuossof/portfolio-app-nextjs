@@ -75,7 +75,6 @@ const AddProductBox = () => {
 
             const urls = await Promise.all(uploadPromises);
             return urls;
-        
     };
 
     const handleProjectsSubmit = async (e: React.FormEvent) => {
@@ -131,6 +130,8 @@ const AddProductBox = () => {
         const files = e.dataTransfer.files
         handleFileChange(files)
     }
+
+    
     return (
         <div>
             <section className="space-y-6 relative">

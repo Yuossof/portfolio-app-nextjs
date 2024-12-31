@@ -9,7 +9,7 @@ const Header = ({ admin }: { admin: boolean }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <header className="fixed w-full z-50 bg-gray-900 border-b-2 border-gray-800 bg-opacity-90 backdrop-blur-sm shadow-lg ">
+    <header className=" w-full bg-gray-900 bg-opacity-90 backdrop-blur-sm  ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
