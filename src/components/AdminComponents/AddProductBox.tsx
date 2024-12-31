@@ -87,8 +87,8 @@ const AddProductBox = () => {
                 description: projectDescription,
                 ProjectsImages: imageUrl,
                 tags: tags,
-                demoUrl: "no yet",
-                githubUrl: "no yet"
+                demoUrl: demoUrl,
+                githubUrl: githubUrl
             })
             setProjectName('')
             setProjectDescription('')
