@@ -6,7 +6,7 @@ const About = async () => {
     return (
         <div>
             {/* <Header admin={isAdmin} /> */}
-            <main className="flex items-center  justify-center w-full m-auto bg-gray-900 min-h-screen relative overflow-visible">
+            <main className="flex items-center mb-6  justify-center w-full m-auto bg-gray-900 min-h-screen relative overflow-visible">
                 <div className='lg:w-2/4 lg:mt-0 xl:mt-0 md:mt-0 2xl:mt-0 sm:mt-8 xl:w-2/4 2xl:w-3/4 md:3/4 sm:w-[90%] w-[90%] mt-8 flex flex-col gap-9 p-4 rounded-md bg-gray-700'>
                     <h1 className='text-center text-3xl font-semibold text-white'>About Me</h1>
                     <section className='flex flex-col gap-3 items-start'>
