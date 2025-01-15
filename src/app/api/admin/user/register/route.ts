@@ -19,15 +19,16 @@ export async function POST(request: NextRequest) {
     try {
         const body = await request.json() as bodyInterface
         const validation = validateRegisterSchema.safeParse(body)
-        if(!validation.success){
-            return NextResponse.json({message: validation.error.issues[0].message}, {status: 400})
+        if (!validation.success) {
+            return NextResponse.json({ message: validation.error.issues[0].message }, { status: 400 })
         }
 
         const user = await prisma.user.findUnique({ where: { email: body.email } })
 
-        if(user){
-            return NextResponse.json({message: "this user already registered"}, {status: 400})
+        if (user) {
+            return NextResponse.json({ message: "this user already registered" }, { status: 400 })
         }
+
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(body.password, salt)
         const newUser = await prisma.user.create({
@@ -41,6 +42,7 @@ export async function POST(request: NextRequest) {
                 isAdmin: true
             }
         })
+
         const jwtPayloada: jwtPayloadType = {
             id: newUser.id,
             isAdmin: newUser.isAdmin
