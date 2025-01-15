@@ -11,7 +11,7 @@ import { Github, Globe } from 'lucide-react'
 import { Menu } from 'lucide-react'
 import Link from 'next/link'
 import LoadingSkeleton from './loading-skeleton/LoadingSkeleton'
-import timage from "../../../public/next.svg"
+
 
 
 interface ProjectDTO {
