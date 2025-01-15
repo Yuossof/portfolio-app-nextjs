@@ -46,7 +46,7 @@ const ProjectCard = () => {
     ]
 
     const [data, setData] = useState<ProjectDTO[]>([])
-    const [filteredData, setFilteredData] = useState(data)
+    const [filteredData, setFilteredData] = useState<ProjectDTO[]>([])
     const [errorMessage, setErrorMessage] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const [filterMenu, setFilterMenu] = useState("All projects")
@@ -60,6 +60,7 @@ const ProjectCard = () => {
                 const projects = res.data
                 setIsLoading(false)
                 setData(projects)
+                setFilteredData(projects)
             } catch (error) {
                 const axiosError = error as AxiosError<ErrorResponse>
                 setErrorMessage(axiosError.response?.data?.message || "An error occurred while fetching projects.")
