@@ -69,7 +69,22 @@ const ProjectCard = () => {
         getProjects()
     }, [])
 
-
+    function formatString(tagName: string) {
+        return tagName.toLowerCase().replace(/\./g, '');
+    }
+    
+    const handleFilterMenu = (item: string[]) => {
+        const formatedItem = item.map((item) => formatString(item));
+    
+        const newData = data.filter(project =>
+            project.tags.some(tag =>
+                formatedItem.length === 0 || formatedItem.includes(formatString(tag.tagName))
+            )
+        );
+    
+        setFilteredData(newData);
+    };
+    
 
     return (
         <section id="projects" className="py-20 w-full flex justify-center bg-gray-900">
@@ -86,9 +101,7 @@ const ProjectCard = () => {
                                 <div key={i} onClick={() => {
                                     setShowFilterMenu(false)
                                     setFilterMenu(item[i] === "" ? "All projects" : item.join(" , "))
-                                    setFilteredData(
-                                        data.filter(project => project.tags.some(tag => item[i] !== "" ? item.includes(tag.tagName) : true))
-                                    );
+                                    handleFilterMenu(item)
                                 }} className='w-full min-h-12 text-white px-4 cursor-pointer py-2 hover:bg-gray-700 flex justify-starts items-center  border-b border-b-gray-700 bg-gray-800'>
                                     {item.join(" , ") === "" ? "All projects" : item.join(" , ")}
                                 </div>
