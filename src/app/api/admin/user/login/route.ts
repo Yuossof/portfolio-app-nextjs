@@ -18,9 +18,9 @@ export async function POST(request: NextRequest) {
         const body = await request.json() as bodyInterface
         const user = await prisma.user.findUnique({ where: { email: body.email } })
         if (!user) {
-                    const salt = await bcrypt.genSalt(10)
+        const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(body.password, salt)
-                             await prisma.user.create({
+        await prisma.user.create({
             data: {
                 name: "Youssof",
                 email: "ys@gmail.com",
@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
                 id: true,
                 isAdmin: true
             }
+        })
         }
             return NextResponse.json({ message: "please make an account, you do not have an account!" }, { status: 400 })
                                                                      
@@ -43,7 +44,6 @@ export async function POST(request: NextRequest) {
         }
         
 
-        })
         const cookie = setCookie(jwtPayload)
         return NextResponse.json({ message: "Authenticated" }, { status: 200, headers: { "Set-Cookie": cookie } })
     } catch (error) {
