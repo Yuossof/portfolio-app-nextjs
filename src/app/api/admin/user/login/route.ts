@@ -18,26 +18,14 @@ export async function POST(request: NextRequest) {
         const body = await request.json() as bodyInterface
         const user = await prisma.user.findUnique({ where: { email: body.email } })
         if (!user) {
-        const salt = await bcrypt.genSalt(10)
-        const hashedPassword = await bcrypt.hash(body.password, salt)
-        await prisma.user.create({
-            data: {
-                name: "Youssof",
-                email: "ys@gmail.com",
-                password: hashedPassword
-            },
-            select: {
-                id: true,
-                isAdmin: true
-            }
-        })
-        }
             return NextResponse.json({ message: "please make an account, you do not have an account!" }, { status: 400 })
+            
+        }
                                                                      
-        // const isPasswordMatch = await bcrypt.compare(body.password, user.password)
-        // if (!isPasswordMatch) {
-        //     return NextResponse.json({ message: "invalid email or password" }, { status: 400 })
-        // }
+        const isPasswordMatch = await bcrypt.compare(body.password, user.password)
+        if (!isPasswordMatch) {
+            return NextResponse.json({ message: "invalid email or password" }, { status: 400 })
+        }
         const jwtPayload: JWTpayloadTypes = {
             id: user.id,
             isAdmin: user.isAdmin,
