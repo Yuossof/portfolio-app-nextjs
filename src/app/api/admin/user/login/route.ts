@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
         if (!user) {
                     const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(body.password, salt)
-                            const newUser = await prisma.user.create({
+                             await prisma.user.create({
             data: {
                 name: "Youssof",
                 email: "ys@gmail.com",
@@ -30,8 +30,9 @@ export async function POST(request: NextRequest) {
                 id: true,
                 isAdmin: true
             }
-            return NextResponse.json({ message: "please make an account, you do not have an account!" }, { status: 400 })
         }
+            return NextResponse.json({ message: "please make an account, you do not have an account!" }, { status: 400 })
+                                                                     
         // const isPasswordMatch = await bcrypt.compare(body.password, user.password)
         // if (!isPasswordMatch) {
         //     return NextResponse.json({ message: "invalid email or password" }, { status: 400 })
